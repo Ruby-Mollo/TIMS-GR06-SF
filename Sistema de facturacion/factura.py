@@ -120,6 +120,7 @@ def mostrar_facturas():
 def anular_factura():
     """Anula una factura existente"""
     facturas = cargar_facturas()
+    productos = cargar_productos()
     mostrar_facturas()
     
     try:
@@ -135,6 +136,13 @@ def anular_factura():
         print("Factura anulada correctamente.")
     except ValueError:
         print("Error: Ingrese un ID numérico válido.")
+
+    if factura['estado'] == "vigente":
+        for item in factura['items']:
+            for p in productos:
+                if p['id'] == item['id']:
+                    p['stock'] += item['cantidad']
+        guardar_productos(productos)
 
 # Funciones auxiliares
 def mostrar_clientes(clientes):
