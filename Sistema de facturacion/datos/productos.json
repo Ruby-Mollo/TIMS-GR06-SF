@@ -9,22 +9,22 @@
     {
         "id": 2,
         "nombre": "sopa",
-        "precio": -3.0,
-        "stock": -12,
+        "precio": 3.0,
+        "stock": 12,
         "estado": "activo"
     },
     {
         "id": 3,
         "nombre": "arroz",
-        "precio": -23.0,
+        "precio": 23.0,
         "stock": 2,
         "estado": "activo"
     },
     {
         "id": 4,
         "nombre": "galleta",
-        "precio": -2.0,
-        "stock": -3,
+        "precio": 2.0,
+        "stock": 3,
         "estado": "activo"
     },
     {
@@ -32,6 +32,13 @@
         "nombre": "gaseosa",
         "precio": 3.4,
         "stock": 3,
+        "estado": "activo"
+    },
+    {
+        "id": 6,
+        "nombre": "Atun",
+        "precio": 100.0,
+        "stock": 6,
         "estado": "activo"
     }
 ]
