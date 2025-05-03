@@ -5,7 +5,8 @@ from cliente import cargar_clientes
 from producto import cargar_productos, guardar_productos
 from utils import calcular_igv_total
 
-data_path = "datos/facturas.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(BASE_DIR, "datos", "facturas.json")
 
 def cargar_facturas():
     """Carga las facturas desde el archivo JSON"""

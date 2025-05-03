@@ -2,7 +2,8 @@ import json
 import os
 from validador import validar_ruc, validar_email, validar_nombre
 
-data_path = "datos/clientes.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(BASE_DIR, "datos", "clientes.json")
 
 def cargar_clientes():
     if not os.path.exists(data_path):

@@ -2,7 +2,9 @@ import json
 import os
 from validador import validar_nombre, validar_numero_float, validar_numero_int
 
-data_path = "datos/productos.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(BASE_DIR, "datos", "productos.json")
+
 
 def cargar_productos():
     if not os.path.exists(data_path):
@@ -32,15 +34,17 @@ def registrar_producto():
 
     while True:
         precio = input("Precio: ")
-        if validar_numero_float(precio):
+        if validar_numero_float(precio) and float(precio) > 0:
             break
         print("Precio inválido. Debe ser un número positivo.")
 
+
     while True:
         stock = input("Stock: ")
-        if validar_numero_int(stock):
+        if validar_numero_int(stock) and int(stock) >= 0:
             break
-        print("Stock inválido. Debe ser un número entero.")
+        print("Stock inválido. Debe ser un número entero no negativo.")
+
 
     productos = cargar_productos()
     nuevo_id = generar_id_producto(productos)
@@ -78,14 +82,14 @@ def editar_producto():
 
         while True:
             nuevo_precio = input("Nuevo precio: ")
-            if validar_numero_float(nuevo_precio):
+            if validar_numero_float(nuevo_precio) and float(nuevo_precio) > 0:
                 producto['precio'] = float(nuevo_precio)
                 break
             print("Precio inválido.")
 
         while True:
             nuevo_stock = input("Nuevo stock: ")
-            if validar_numero_int(nuevo_stock):
+            if validar_numero_int(nuevo_stock) and int(nuevo_stock) >= 0:
                 producto['stock'] = int(nuevo_stock)
                 break
             print("Stock inválido.")
