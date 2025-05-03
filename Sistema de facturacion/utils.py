@@ -1,5 +1,5 @@
 def calcular_igv_total(productos):
-    subtotal = sum(p['precio'] * p['cantidad'] for p in productos)
-    igv = round(subtotal * 0.18, 2)
-    total = subtotal + igv
+    total = sum(p['precio'] * p['cantidad'] for p in productos)
+    igv = round(total-(total / 1.18),2)
+    subtotal = round((total / 1.18),2)
     return total, igv, subtotal
