@@ -1,6 +1,6 @@
 import json
 import os
-from validador import validar_ruc, validar_email, validar_nombre
+from validador import validar_ruc, validar_email, validar_nombre_empresa
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 data_path = os.path.join(BASE_DIR, "datos", "clientes.json")
@@ -27,18 +27,18 @@ def registrar_cliente():
     print("\n--- Registro de Cliente ---")
     while True:
         nombre = input("Nombre: ")
-        if validar_nombre(nombre):
+        if validar_nombre_empresa(nombre):
             break
-        print("Nombre inválido. Solo letras y espacios son permitidos.")
+        print("Error: Nombre inválido. Debe tener entre 3-100 caracteres (solo letras, números, espacios o guiones).")
 
     while True:
-        ruc = input("RUC: ")
+        ruc = input("RUC (11 dígitos, empezando con 10 o 20): ")
         if validar_ruc(ruc):
             if any (c["ruc"] == ruc for c in cargar_clientes()):
                 print("Error: RUC ya registrado")
                 continue
-            break
-        print("RUC inválido. Debe contener exactamente 11 dígitos.")
+            break   
+        print("Error: RUC debe tener 11 dígitos, empezar con 10/20 y ser único.")
 
     while True:
         email = input("Correo electrónico: ")
@@ -75,10 +75,10 @@ def editar_cliente():
         print(f"Editando: {cliente['nombre']}")
         while True:
             nuevo_nombre = input("Nuevo nombre: ")
-            if validar_nombre(nuevo_nombre):
+            if validar_nombre_empresa(nuevo_nombre):
                 cliente['nombre'] = nuevo_nombre
                 break
-            print("Nombre inválido. Solo letras y espacios.")
+            print("Error: Nombre inválido. Debe tener entre 3-100 caracteres (solo letras, números, espacios o guiones).")
 
         while True:
             nuevo_email = input("Nuevo correo electrónico: ")

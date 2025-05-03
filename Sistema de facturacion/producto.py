@@ -1,6 +1,6 @@
 import json
 import os
-from validador import validar_nombre, validar_numero_float, validar_numero_int
+from validador import validar_nombre_producto, validar_numero_float, validar_numero_int
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 data_path = os.path.join(BASE_DIR, "datos", "productos.json")
@@ -28,9 +28,9 @@ def registrar_producto():
     print("\n--- Registro de Producto ---")
     while True:
         nombre = input("Nombre del producto: ")
-        if validar_nombre(nombre):
+        if validar_nombre_producto(nombre):
             break
-        print("Nombre inválido. Solo letras y espacios.")
+        print("Error: Nombre inválido. Use 3-100 caracteres (no solo números).")
 
     while True:
         precio = input("Precio: ")
@@ -75,10 +75,10 @@ def editar_producto():
         print(f"Editando: {producto['nombre']}")
         while True:
             nuevo_nombre = input("Nuevo nombre: ")
-            if validar_nombre(nuevo_nombre):
+            if validar_nombre_producto(nuevo_nombre):
                 producto['nombre'] = nuevo_nombre
                 break
-            print("Nombre inválido. Solo letras y espacios.")
+            print("Error: Nombre inválido. Use 3-100 caracteres (no solo números)")
 
         while True:
             nuevo_precio = input("Nuevo precio: ")
