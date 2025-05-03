@@ -77,30 +77,35 @@ def crear_factura():
                 "cantidad": cantidad
             })
             producto['stock'] -= cantidad
-            
-            if input("¿Agregar otro producto? (s/n): ").lower() != 's':
-                break
+
+            while True:
+                respuesta = input("¿Agregar otro producto? (s/n): ").lower()
+                if respuesta == 's':
+                    break  
+                elif respuesta == 'n':
+                    guardar_productos(productos)  
+                    
+                    total, igv, subtotal = calcular_igv_total(items)
+                    nueva_factura = {
+                        "id": len(facturas) + 1,
+                        "fecha": datetime.now().strftime("%d/%m/%Y %H:%M"),
+                        "cliente": cliente,
+                        "items": items,
+                        "subtotal": subtotal,
+                        "igv": igv,
+                        "total": total,
+                        "estado": "vigente"
+                    }
+                    facturas.append(nueva_factura)
+                    guardar_facturas(facturas)
+                    print("\nFACTURA GENERADA CON ÉXITO!")
+                    imprimir_factura(nueva_factura)
+                    return  
+                else:
+                    print("Opción inválida. Ingrese 's' para Sí o 'n' para No.")
+        
         except ValueError:
             print("Error: Ingrese valores numéricos válidos.")
-
-    # Cálculo de totales
-    total, igv, subtotal = calcular_igv_total(items)
-    nueva_factura = {
-        "id": len(facturas) + 1,
-        "fecha": datetime.now().strftime("%d/%m/%Y %H:%M"),
-        "cliente": cliente,
-        "items": items,
-        "subtotal": subtotal,
-        "igv": igv,
-        "total": total,
-        "estado": "vigente"
-    }
-    
-    guardar_productos(productos)
-    facturas.append(nueva_factura)
-    guardar_facturas(facturas)
-    print("\nACTURA GENERADA CON ÉXITO!")
-    imprimir_factura(nueva_factura)
 
 def mostrar_facturas():
     """Muestra todas las facturas vigentes"""
