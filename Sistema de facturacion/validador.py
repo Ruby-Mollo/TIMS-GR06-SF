@@ -4,7 +4,7 @@ def validar_ruc(ruc):
     return re.match(r"^[0-9]{11}$", ruc)
 
 def validar_email(email):
-    return re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", email)
+    return re.match(r"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", email)
 
 def validar_numero_float(valor):
     try:
