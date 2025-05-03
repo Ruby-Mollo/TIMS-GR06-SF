@@ -33,6 +33,9 @@ def registrar_cliente():
     while True:
         ruc = input("RUC: ")
         if validar_ruc(ruc):
+            if any (c["ruc"] == ruc for c in cargar_clientes()):
+                print("Error: RUC ya registrado")
+                continue
             break
         print("RUC inválido. Debe contener exactamente 11 dígitos.")
 
