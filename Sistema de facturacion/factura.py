@@ -27,14 +27,15 @@ def guardar_facturas(facturas):
 
 def crear_factura():
     """Crea una nueva factura con validaciones"""
+    todos_los_productos = cargar_productos()
+    productos_disponibles = [p for p in todos_los_productos if p['estado'] == 'activo' and p['stock'] > 0]
     clientes = [c for c in cargar_clientes() if c['estado'] == 'activo']
-    productos = [p for p in cargar_productos() if p['estado'] == 'activo' and p['stock'] > 0]
     facturas = cargar_facturas()
 
     if not clientes:
         print("Error: No hay clientes registrados.")
         return
-    if not productos:
+    if not productos_disponibles:
         print("Error: No hay productos disponibles.")
         return
 
@@ -55,10 +56,10 @@ def crear_factura():
     # Selección de productos
     items = []
     while True:
-        mostrar_productos(productos)
+        mostrar_productos(productos_disponibles)
         try:
             opcion = int(input("\nSeleccione producto (ID): "))
-            producto = next((p for p in productos if p['id'] == opcion), None)
+            producto = next((p for p in productos_disponibles if p['id'] == opcion), None)
             if not producto:
                 print("Error: ID no válido.")
                 continue
@@ -79,12 +80,16 @@ def crear_factura():
             })
             producto['stock'] -= cantidad
 
+            for p in todos_los_productos:
+                if p['id'] == producto['id']:
+                    p['stock'] -= cantidad
+
             while True:
                 respuesta = input("¿Agregar otro producto? (s/n): ").lower()
                 if respuesta == 's':
                     break  
                 elif respuesta == 'n':
-                    guardar_productos(productos)  
+                    guardar_productos(producto)  
                     
                     total, igv, subtotal = calcular_igv_total(items)
                     nueva_factura = {
@@ -97,6 +102,7 @@ def crear_factura():
                         "total": total,
                         "estado": "vigente"
                     }
+                    guardar_productos(todos_los_productos)
                     facturas.append(nueva_factura)
                     guardar_facturas(facturas)
                     print("\nFACTURA GENERADA CON ÉXITO!")
