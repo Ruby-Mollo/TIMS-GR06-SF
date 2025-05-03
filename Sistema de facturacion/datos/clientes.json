@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "nombre": "Ruby",
+        "ruc": "10123456789",
+        "email": "lopez@gmail.com",
+        "estado": "activo"
+    },
+    {
+        "id": 2,
+        "nombre": "juan",
+        "ruc": "20154789645",
+        "email": "juan@gmail.com",
+        "estado": "activo"
+    }
+]

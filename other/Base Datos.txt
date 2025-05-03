@@ -1,0 +1,59 @@
+CREATE DATABASE IF NOT EXISTS facturacion;
+USE facturacion;
+
+CREATE TABLE cliente (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    dni VARCHAR(8),
+    email VARCHAR(50),
+    telefono VARCHAR(9),
+    direccion VARCHAR(255),
+    razon_social VARCHAR(255),
+    ruc VARCHAR(11),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE producto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    descripcion VARCHAR(255),
+    categoria VARCHAR(100),
+    cantidad INT,
+    precio DECIMAL(10,2),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE factura (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT,
+    fecha DATE,
+    subtotal DECIMAL(10,2),
+    igv DECIMAL(10,2),
+    total DECIMAL(10,2),
+    estado ENUM('Pagado', 'Pendiente', 'Vencido') DEFAULT 'Pendiente',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id)
+);
+
+CREATE TABLE detalle_factura (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_factura INT,
+    id_producto INT,
+    cantidad INT,
+    precio_unitario DECIMAL(10,2),
+    subtotal DECIMAL(10,2),
+    FOREIGN KEY (id_factura) REFERENCES factura(id),
+    FOREIGN KEY (id_producto) REFERENCES producto(id)
+);
+
+CREATE TABLE pago (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_factura INT,
+    monto DECIMAL(10,2),
+    fecha DATE,
+    metodo_pago VARCHAR(50),
+    FOREIGN KEY (id_factura) REFERENCES factura(id)
+);
