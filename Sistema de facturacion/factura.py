@@ -130,32 +130,37 @@ def mostrar_facturas():
         print(f"TOTAL: S/{fac['total']:.2f} (IGV: S/{fac['igv']:.2f})")
 
 def anular_factura():
-    """Anula una factura existente"""
+    """Anula una factura existente y restaura el stock si estaba vigente"""
     facturas = cargar_facturas()
     productos = cargar_productos()
     mostrar_facturas()
     
     try:
         id_factura = int(input("\nID de factura a anular: "))
-        factura = next((f for f in facturas if f['id'] == id_factura), None)
-        
-        if not factura:
-            print("Error: Factura no encontrada.")
-            return
-            
-        factura['estado'] = "anulado"
-        guardar_facturas(facturas)
-        print("Factura anulada correctamente.")
     except ValueError:
         print("Error: Ingrese un ID numérico válido.")
+        return  # Salir de la función si el ID no es numérico
 
+    # Buscar la factura después de validar que el ID es numérico
+    factura = next((f for f in facturas if f['id'] == id_factura), None)
+        
+    if not factura:
+        print("Error: Factura no encontrada.")
+        return
+        
     if factura['estado'] == "vigente":
+        # Restaurar stock solo si la factura estaba vigente
         for item in factura['items']:
             for p in productos:
                 if p['id'] == item['id']:
                     p['stock'] += item['cantidad']
         guardar_productos(productos)
-
+    
+    factura['estado'] = "anulado"
+    guardar_facturas(facturas)
+    print("Factura anulada correctamente y stock restaurado." if factura['estado'] == "vigente" 
+          else "Factura anulada correctamente.")
+    
 # Funciones auxiliares
 def mostrar_clientes(clientes):
     print("\n--- CLIENTES DISPONIBLES ---")
