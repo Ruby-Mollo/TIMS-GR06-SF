@@ -1,8 +1,8 @@
 DATOS
-Calvo Ticona Carlos Andres            2022224621
-Herrera Gamarra Diego Alberto         2013246741
-Mollo Lopez Ruby Alejandra            2022602102
-Saico Usca Enrique Smit               2023400391
-Thola Gomez Alexander Rolandino       2022250481 
+Calvo Ticona Carlos Andres (AndresCT1)                  2022224621
+Herrera Gamarra Diego Alberto (Diego9626)               2013246741
+Mollo Lopez Ruby Alejandra (Ruby-Mollo)                 2022602102
+Saico Usca Enrique Smit (Saico11)                       2023400391
+Thola Gomez Alexander Rolandino (Alexander-Thola)       2022250481 
 
 
