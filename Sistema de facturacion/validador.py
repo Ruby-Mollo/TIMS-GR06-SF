@@ -27,7 +27,7 @@ def validar_email(email):
     consecutivos en el dominio (ej: gmaill.com, coom, ..).
     """
     # Verificar estructura básica con regex (no valida duplicados aún)
-    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    pattern = r"^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
     if not re.match(pattern, email):
         return False
 
