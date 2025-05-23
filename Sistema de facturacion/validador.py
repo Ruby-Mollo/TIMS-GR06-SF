@@ -20,10 +20,30 @@ def validar_ruc(ruc):
         return False
     
     return True
-#Mejorando la validacion de email
+
 def validar_email(email):
-    pattern = r"^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-    return re.match(pattern, email)
+    """
+    Valida estructura general de correo y prohíbe duplicación de caracteres
+    consecutivos en el dominio (ej: gmaill.com, coom, ..).
+    """
+    # Verificar estructura básica con regex (no valida duplicados aún)
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    if not re.match(pattern, email):
+        return False
+
+    # Separar parte local y dominio
+    try:
+        local, domain = email.split('@')
+    except ValueError:
+        return False  # más de un @
+
+    # Revisar duplicación de caracteres consecutivos en dominio
+    for i in range(1, len(domain)):
+        if domain[i] == domain[i - 1]:
+            return False  # hay duplicación de letra o punto
+
+    return True
+
 
 def validar_numero_float(valor):
     try:
