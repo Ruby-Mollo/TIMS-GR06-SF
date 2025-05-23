@@ -71,6 +71,8 @@ def validar_nombre_empresa(nombre):
     - Permite letras (incluido ñ/Ñ y tildes), números, espacios y guiones
     - No permite caracteres especiales ni secuencias inválidas
     """
+    if '--' in nombre:
+        return False
     
     if not 3 <= len(nombre) <= 100:
         return False
