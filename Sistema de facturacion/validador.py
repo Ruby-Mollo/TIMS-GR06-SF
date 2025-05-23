@@ -20,9 +20,10 @@ def validar_ruc(ruc):
         return False
     
     return True
-
+#Mejorando la validacion de email
 def validar_email(email):
-    return re.match(r"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", email)
+    pattern = r"^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    return re.match(pattern, email)
 
 def validar_numero_float(valor):
     try:
