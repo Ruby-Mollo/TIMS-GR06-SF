@@ -73,10 +73,6 @@ def validar_nombre_empresa(nombre):
     """
     if '--' in nombre:
         return False
-    if nombre == "":
-        return False
-    if '\t' in nombre or '\n' in nombre:
-        return False
     
     if not 3 <= len(nombre) <= 100:
         return False
@@ -91,6 +87,9 @@ def validar_nombre_producto(nombre):
     - No permite solo números
     """
     if not 3 <= len(nombre) <= 100:
+        return False
+    
+    if '\t' in nombre or '\n' in nombre:
         return False
     
     if re.match(r"^[0-9\s\-\.]+$", nombre):  # Si contiene solo números
