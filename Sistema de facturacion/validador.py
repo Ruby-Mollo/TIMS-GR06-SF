@@ -46,6 +46,9 @@ def validar_email(email):
 
 
 def validar_numero_float(valor):
+    # Rechazar si hay espacios al inicio o fin
+    if valor.strip() != valor:
+        return False
     try:
         float(valor)
         return True
