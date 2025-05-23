@@ -73,6 +73,10 @@ def validar_nombre_empresa(nombre):
     """
     if '--' in nombre:
         return False
+    if nombre == "":
+        return False
+    if '\t' in nombre or '\n' in nombre:
+        return False
     
     if not 3 <= len(nombre) <= 100:
         return False
