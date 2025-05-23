@@ -56,6 +56,8 @@ def validar_numero_float(valor):
         return False
 
 def validar_numero_int(valor):
+    if valor.strip() != valor:
+        return False
     try:
         int(valor)
         return True
