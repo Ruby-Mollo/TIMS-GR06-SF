@@ -66,10 +66,11 @@ def validar_nombre_empresa(nombre):
     - Permite letras (incluido ñ/Ñ y tildes), números, espacios y guiones
     - No permite caracteres especiales ni secuencias inválidas
     """
+    
     if not 3 <= len(nombre) <= 100:
         return False
     
-    return re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-\.]+$", nombre) is not None
+    return re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 \-\.]+$", nombre) is not None
 
 def validar_nombre_producto(nombre):
     """
