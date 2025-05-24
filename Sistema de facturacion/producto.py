@@ -46,9 +46,14 @@ def registrar_producto():
 
     while True:
         stock = input("Stock: ")
-        if validar_numero_int(stock) and int(stock) >= 0:
-            break
-        print("Stock inválido. Debe ser un número entero no negativo.")
+        if validar_numero_int(stock):
+            valor_stock = int(stock)
+            if 1 <= valor_stock <= 100:
+                break
+            else:
+                print("Stock fuera de rango. Debe estar entre 1 y 100.")
+        else:
+            print("Stock inválido. Debe ser un número entero positivo.")
 
 
     productos = cargar_productos()
