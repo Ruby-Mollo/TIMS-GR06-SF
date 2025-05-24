@@ -94,7 +94,7 @@ def editar_producto():
 
         while True:
             nuevo_precio = input("Nuevo precio: ")
-            if validar_numero_float(nuevo_precio) and float(nuevo_precio) > 0:
+            if validar_numero_float(nuevo_precio) and 0.01 <= float(nuevo_precio) <= 1_000_000:
                 producto['precio'] = float(nuevo_precio)
                 break
             print("Precio inválido.")
