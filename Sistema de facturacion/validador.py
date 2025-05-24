@@ -73,13 +73,21 @@ def validar_nombre_empresa(nombre):
     - Permite letras (incluido ñ/Ñ y tildes), números, espacios y guiones
     - No permite caracteres especiales ni secuencias inválidas
     """
+    if nombre != nombre.strip():
+        raise ValueError("No se puede colocar espacios antes ni despues del nombre")
+    
+    if ' ' in nombre:
+        raise ValueError("Error: No se permiten espacios dentro del nombre")
+    
     if '--' in nombre:
         return False
     
     if not 3 <= len(nombre) <= 100:
         return False
     
-    return re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 \-\.]+$", nombre) is not None
+    # Validar patrón permitido
+    patron = r"^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 \-\.]+$"
+    return re.match(patron, nombre) is not None
 
 def validar_nombre_producto(nombre):
     """
@@ -88,6 +96,7 @@ def validar_nombre_producto(nombre):
     - Permite letras, números, espacios y algunos símbolos comunes
     - No permite solo números
     """
+
     if not 3 <= len(nombre) <= 100:
         return False
     
