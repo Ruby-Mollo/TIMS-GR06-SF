@@ -92,7 +92,7 @@ def validar_nombre_producto(nombre):
     if '\t' in nombre or '\n' in nombre:
         return False
     
-    if re.match(r"^[0-9\s\-\.]+$", nombre):  # Si contiene solo números
+    if re.match(r"^[0-9\s\-\.\,\/\(\)]+$", nombre):  # Si contiene solo números
         return False
     
     return re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-\.\,\/]+$", nombre) is not None
