@@ -58,6 +58,8 @@ def validar_numero_float(valor):
 def validar_numero_int(valor):
     if valor.strip() != valor:
         return False
+    if valor != str(int(valor)):  # previene cosas como "0005"
+        return False
     try:
         int(valor)
         return True
