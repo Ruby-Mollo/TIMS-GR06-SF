@@ -68,13 +68,18 @@ def mostrar_productos():
 def editar_producto():
     productos = cargar_productos()
     mostrar_productos()
-    while True:
+    producto = None
+    while not producto:
         entrada = input("Ingrese el ID del producto a editar: ")
         try:
             producto_id = int(entrada)
-            break
+            producto = next((p for p in productos if p["id"] == producto_id), None)
+            if not producto:
+                print("Producto no encontrado. Intente nuevamente.")
         except ValueError:
-            print("Error: No se permiten letras o símbolos. Ingrese solo números.")
+            print("Error: Solo se permiten números. Intente nuevamente.")
+
+    print(f"Editando: {producto['nombre']}")
 
     producto = next((p for p in productos if p["id"] == producto_id), None)
 
