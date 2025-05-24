@@ -34,9 +34,14 @@ def registrar_producto():
 
     while True:
         precio = input("Precio: ")
-        if validar_numero_float(precio) and float(precio) > 0:
-            break
-        print("Precio inválido. Debe ser un número positivo.")
+        if validar_numero_float(precio):
+            valor_precio = float(precio)
+            if 0.10 <= valor_precio <= 1_00:
+                break
+            else:
+                print("Precio fuera de rango. Debe estar entre 0.10 y 100.")
+        else:
+            print("Precio inválido. Debe ser un número positivo.")
 
 
     while True:
