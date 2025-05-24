@@ -101,10 +101,15 @@ def editar_producto():
 
         while True:
             nuevo_stock = input("Nuevo stock: ")
-            if validar_numero_int(nuevo_stock) and int(nuevo_stock) >= 0:
-                producto['stock'] = int(nuevo_stock)
-                break
-            print("Stock inválido.")
+            if validar_numero_int(nuevo_stock):
+                stock_valor = int(nuevo_stock)
+                if 0 <= stock_valor <= 100:
+                    producto['stock'] = stock_valor
+                    break
+                else:
+                    print("Stock fuera de rango. Máximo permitido: 100,000.")
+            else:
+                print("Stock inválido. Debe ser un número entero positivo.")
 
         while True:
             nuevo_estado = input("Nuevo estado (activo/inactivo): ").lower()
